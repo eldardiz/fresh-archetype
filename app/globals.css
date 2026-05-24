@@ -1,0 +1,31 @@
+@import "tailwindcss";
+@import "../styles/claude-design.css";
+
+:root{
+  --accent:        #D9F45A;
+  --accent-ink:    #1B2206;
+  --accent-soft:   #F2FBC8;
+  --accent-line:   #BFE03D;
+
+  --bg:            #FAFAF7;
+  --surface:       #FFFFFF;
+  --ink:           #0E0E0C;
+  --ink-2:         #2A2A28;
+  --ink-muted:     #6B6B66;
+  --line:          #E8E7E1;
+
+  --font-display:  "Bricolage Grotesque", ui-sans-serif, sans-serif;
+  --font-body:     "Space Grotesk", ui-sans-serif, sans-serif;
+
+  --radius-card:   28px;
+  --radius-pill:   999px;
+  --radius-sm:     14px;
+
+  --rail:          88px;
+  --gutter:        56px;
+  --maxw:          1320px;
+
+  --shadow-1:      0 1px 0 rgba(15,15,12,.04), 0 4px 14px rgba(15,15,12,.05);
+  --shadow-2:      0 12px 36px rgba(15,15,12,.10);
+  --shadow-cta:    0 18px 40px rgba(15,15,12,.18);
+}

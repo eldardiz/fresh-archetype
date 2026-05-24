@@ -1,0 +1,41 @@
+/* ──────────────────────────────────────────────────────────────────────────
+ * Fresh archetype — design tokens
+ *
+ * Generated from the Claude Design output (Template 02). Swap any --color-*
+ * or --font-* value per project to reskin the whole site without touching
+ * components. The token surface is intentionally small.
+ * ────────────────────────────────────────────────────────────────────────── */
+
+:root{
+  /* palette */
+  --accent:        #D9F45A;     /* electric lime — the bright accent */
+  --accent-ink:    #1B2206;     /* readable text on accent surfaces  */
+  --accent-soft:   #F2FBC8;     /* very light tint, for hover fills  */
+  --accent-line:   #BFE03D;     /* slightly deeper for borders/lines */
+
+  --bg:            #FAFAF7;     /* paper white                       */
+  --surface:       #FFFFFF;     /* card surface                      */
+  --ink:           #0E0E0C;     /* near-black for headings           */
+  --ink-2:         #2A2A28;     /* body                              */
+  --ink-muted:     #6B6B66;     /* muted, captions                   */
+  --line:          #E8E7E1;     /* hairlines                         */
+
+  /* type */
+  --font-display:  "Bricolage Grotesque", ui-sans-serif, sans-serif;
+  --font-body:     "Space Grotesk", ui-sans-serif, sans-serif;
+
+  /* shape */
+  --radius-card:   28px;
+  --radius-pill:   999px;
+  --radius-sm:     14px;
+
+  /* layout */
+  --rail:          88px;        /* left sidebar width                */
+  --gutter:        56px;        /* page horizontal padding           */
+  --maxw:          1320px;      /* content max width                 */
+
+  /* shadows */
+  --shadow-1:      0 1px 0 rgba(15,15,12,.04), 0 4px 14px rgba(15,15,12,.05);
+  --shadow-2:      0 12px 36px rgba(15,15,12,.10);
+  --shadow-cta:    0 18px 40px rgba(15,15,12,.18);
+}
