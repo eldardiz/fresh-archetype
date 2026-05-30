@@ -69,16 +69,28 @@ export default function SignatureSection() {
   // Initial highlight matches the source: index 2 (Brioche).
   const [active, setActive] = useState(2)
   const [paused, setPaused] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
   const sectionRef = useRef<HTMLElement | null>(null)
   const inView = useInView(sectionRef)
 
+  // Autoplay runs on mobile/tablet only. Desktop users get a static
+  // highlight + hover-to-cycle (because the 3 floating photos already give
+  // the section enough motion).
   useEffect(() => {
-    if (!inView || paused) return
+    const mql = window.matchMedia('(max-width: 900px)')
+    const update = () => setIsMobile(mql.matches)
+    update()
+    mql.addEventListener('change', update)
+    return () => mql.removeEventListener('change', update)
+  }, [])
+
+  useEffect(() => {
+    if (!isMobile || !inView || paused) return
     const id = window.setInterval(() => {
       setActive((i) => (i + 1) % ITEMS.length)
     }, 1000)
     return () => window.clearInterval(id)
-  }, [inView, paused])
+  }, [isMobile, inView, paused])
 
   return (
     <section id="signature" className="signature" ref={sectionRef}>
