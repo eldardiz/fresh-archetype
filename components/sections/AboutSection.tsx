@@ -1,7 +1,5 @@
-import type { AboutData } from '@/lib/sanity.types'
-
 interface AboutCard {
-  icon: 'i-leaf' | 'i-clock' | 'i-spark'
+  icon: 'i-leaf' | 'i-clock' | 'i-spark' | 'i-heart'
   heading: string
   body: string
 }
@@ -22,16 +20,19 @@ const DEFAULT_CARDS: AboutCard[] = [
     heading: 'New every week.',
     body: 'The menu shifts with the season, figs in August, citrus in February. The classics stay; the specials keep us awake at night.',
   },
+  {
+    icon: 'i-heart',
+    heading: 'Sold by the slice.',
+    body: 'Whole loaves before noon, by the slice after. Friendly portions, fair prices, no cake on a pedestal.',
+  },
 ]
 
 const DEFAULT_VISUAL = 'https://images.unsplash.com/photo-1486427944299-d1955d23e34d?auto=format&fit=crop&w=1400&q=80'
 
-export default function AboutSection({ data }: { data?: AboutData | null }) {
-  const heading = data?.heading || 'A small kitchen with loud opinions.'
+export default function AboutSection() {
+  const heading = 'A small kitchen with loud opinions.'
   const lede = "We bake with stone-milled flour, press citrus a block from where it's served, and don't believe in shortcuts you can taste."
-  const meta = data?.meta && data.meta.length > 0
-    ? data.meta.slice(0, 2)
-    : [{ label: 'Since', value: '2019' }, { label: '', value: 'Family-run' }]
+  const meta = [{ label: 'Since', value: '2019' }, { label: '', value: 'Family-run' }]
 
   return (
     <section id="about" className="about wrap">

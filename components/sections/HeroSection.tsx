@@ -1,21 +1,16 @@
 import { brand } from '@/lib/brand'
-import type { HeroData, SiteSettingsData } from '@/lib/sanity.types'
 
 const DEFAULT_HERO_IMG = 'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=2200&q=80'
 
-export default function HeroSection({ data, settings }: { data?: HeroData | null; settings?: SiteSettingsData | null }) {
-  const businessName = settings?.restaurantName ?? brand.identity.name
-  const tagline = data?.subheading || brand.identity.description || settings?.tagline || brand.identity.tagline
-  // Pills around the photo come from brand.identity by default.
-  const categoryPill = data?.eyebrow || brand.hero?.categoryPill || 'Bakery · Juice · Café'
-  const openPill = brand.hero?.openPill || `Open today · ${settings?.hours?.full || brand.hours.full || '7am – 9pm'}`
+export default function HeroSection() {
+  const businessName = brand.identity.name
+  const tagline = brand.identity.description || brand.identity.tagline
+  const categoryPill = brand.hero?.categoryPill || 'Bakery · Juice · Café'
+  const openPill = brand.hero?.openPill || `Open today · ${brand.hours.full || '7am – 9pm'}`
   const chips = brand.hero?.chips || ['Est. 2019', 'West Village, NYC', 'B-Corp']
   const tickerLeft = brand.hero?.tickerLeft || { label: 'Now pouring', value: 'Cold-pressed grapefruit · ginger · rosemary' }
   const tickerRight = brand.hero?.tickerRight || ['Sourdough drops at 8am', 'Croissants Sat & Sun']
-
-  const imgUrl = data?.image?.asset
-    ? undefined // (Sanity image upgrade comes later; for now we use the source URL when no Sanity image)
-    : DEFAULT_HERO_IMG
+  const imgUrl = DEFAULT_HERO_IMG
 
   return (
     <section id="hero" className="hero">

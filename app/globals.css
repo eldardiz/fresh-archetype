@@ -21,9 +21,8 @@
   --radius-pill:   999px;
   --radius-sm:     14px;
 
-  --rail:          88px;
-  --gutter:        56px;
-  --maxw:          1320px;
+  /* --gutter, --rail, --maxw live in claude-design.css so the media-query
+   * overrides at ≤1100/900/720/480 can actually win the cascade. */
 
   --shadow-1:      0 1px 0 rgba(15,15,12,.04), 0 4px 14px rgba(15,15,12,.05);
   --shadow-2:      0 12px 36px rgba(15,15,12,.10);

@@ -24,6 +24,30 @@ const FALLBACK: FaqItem[] = [
       </>
     ),
   },
+  {
+    num: '04',
+    q: 'Do you bake gluten-free?',
+    a: 'Two gluten-free items run every day, a buckwheat loaf and a flourless chocolate cake, both made on a separate bench. We are not a fully gluten-free kitchen, so trace contact is possible.',
+  },
+  {
+    num: '05',
+    q: 'Can I pre-order a custom cake?',
+    a: (
+      <>
+        Yes, with five days notice. Tell us the headcount, the occasion, and any allergies; we&apos;ll send back two or three options with prices. Pickup only, no delivery for cakes.
+      </>
+    ),
+  },
+  {
+    num: '06',
+    q: 'Are dogs allowed?',
+    a: 'On the terrace, always. Inside, only assistance dogs. Water bowls live by the front door, and the croissant crumbs are on the house.',
+  },
+  {
+    num: '07',
+    q: 'What time does the morning bake come out?',
+    a: 'Croissants and pain au chocolat at 7am sharp. Sourdough and country loaves around 8:30. Cinnamon buns when the timer goes off, usually before 9. If something matters to you, call ahead and we&apos;ll set one aside.',
+  },
 ]
 
 export default function FAQSection() {

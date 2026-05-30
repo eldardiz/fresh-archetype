@@ -5,7 +5,6 @@ import Sidebar from '@/components/layout/Sidebar'
 import FloatingCTAs from '@/components/layout/FloatingCTAs'
 import IconSprite from '@/components/ui/IconSprite'
 import { brand } from '@/lib/brand'
-import { getSiteSettings } from '@/lib/getHomepage'
 
 const bricolage = Bricolage_Grotesque({
   variable: '--font-bricolage',
@@ -29,33 +28,27 @@ const LOCALE_OG_MAP: Record<typeof brand.identity.locale, string> = {
   it: 'it_IT',
 }
 
-export async function generateMetadata(): Promise<Metadata> {
-  const s = await getSiteSettings()
-  const name = s?.restaurantName ?? brand.identity.name
-  const tagline = s?.tagline ?? brand.identity.tagline
-  const description = s?.description ?? brand.identity.description
-  return {
-    title: tagline ? `${name} — ${tagline}` : name,
-    description,
-    openGraph: {
-      title: name,
-      description: tagline,
-      locale: LOCALE_OG_MAP[brand.identity.locale],
-      type: 'website',
-    },
-  }
+export const metadata: Metadata = {
+  title: brand.identity.tagline
+    ? `${brand.identity.name} · ${brand.identity.tagline}`
+    : brand.identity.name,
+  description: brand.identity.description,
+  openGraph: {
+    title: brand.identity.name,
+    description: brand.identity.tagline,
+    locale: LOCALE_OG_MAP[brand.identity.locale],
+    type: 'website',
+  },
 }
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  const settings = await getSiteSettings()
   return (
     <html
       lang={brand.identity.locale}
       className={`${bricolage.variable} ${spaceGrotesk.variable}`}
       style={{
-        // Map our next/font CSS variables into the names the stylesheet expects.
         ['--font-display' as never]: `var(--font-bricolage), ui-sans-serif, sans-serif`,
         ['--font-body' as never]: `var(--font-space-grotesk), ui-sans-serif, sans-serif`,
       } as React.CSSProperties}
@@ -66,7 +59,7 @@ export default async function RootLayout({
           <Sidebar />
           <main>{children}</main>
         </div>
-        <FloatingCTAs settings={settings} />
+        <FloatingCTAs />
       </body>
     </html>
   )

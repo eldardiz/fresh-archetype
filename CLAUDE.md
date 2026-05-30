@@ -43,37 +43,35 @@ Footer             → marquee with brand name repeated + yellow dot dividers, c
 ## Stack
 
 - Next.js 16.2.4, TypeScript, Tailwind CSS v4
-- Sanity CMS (singletons: hero / featuredOffering / about / siteSettings + testimonial collection)
+- GSAP (testimonial slider + footer parallax)
+- **No CMS by default.** All content lives in `lib/brand.ts` + per-component `FALLBACK` constants. Sanity is available as an opt-in add-on at `vibe-coding/projects/archetypes/_addons/sanity-cms/` — restore only when a client explicitly wants self-serve content editing. See that folder's README before deciding.
 - Vercel deploy
 - **Lead-gen homepage only.** No private hire, no careers, no forms-with-server-actions. Contact form is decorative (no submission wired yet).
-- **No GSAP, no Lenis, no scroll-rich motion.** Fresh is intentionally modular and static — hover lifts on cards, marquee on footer, that's it. The visual personality carries weight without scroll choreography.
 
 ## Files of structural importance
 
 ```
-lib/brand.ts                         ← single source of business data
-lib/sanity.types.ts                  ← TS types
-lib/queries.ts                       ← GROQ queries (4 singletons + testimonial collection)
-lib/getHomepage.ts                   ← combined homepage fetch + fallback
-lib/seed.ts                          ← placeholder seed (npm run seed:sanity)
-sanity/schemaTypes/                  ← 4 singleton schemas + testimonial
-sanity/sanity.config.ts              ← Sanity Studio config
+lib/brand.ts                         ← single source of business data (the per-lead swap point)
+lib/horizontalLoop.ts                ← GSAP helper for testimonial slider
 styles/figma-tokens.css              ← CSS variables (palette + typography + radii)
 styles/claude-design.css             ← all application styles, reads from tokens
 components/layout/Sidebar.tsx        ← persistent left vertical nav
 components/layout/FloatingCTAs.tsx   ← bottom-right Phone + Book cluster
-components/layout/Footer.tsx         ← marquee + copyright
-components/ui/BentoCard.tsx          ← yellow-bordered rounded card primitive
-components/ui/PillLabel.tsx          ← ○ hexagon-icon section label
+components/layout/Footer.tsx         ← parallax footer with lime wordmark
+components/layout/FooterParallax.tsx ← GSAP ScrollTrigger wrapper for footer
+components/ui/IconSprite.tsx         ← SVG sprite definitions used across the site
 components/sections/HeroSection.tsx          ← full-bleed photo + giant sans logo
 components/sections/FeaturedOfferingSection.tsx ← 2x2 photo card grid
-components/sections/AboutSection.tsx         ← 3 stacked bento cards with icons
-components/sections/FAQSection.tsx           ← accordion (client component for open/close)
-components/sections/TestimonialsSection.tsx  ← 3 bento cards with stars
+components/sections/SignatureSection.tsx     ← dark hover-swap photo list
+components/sections/AboutSection.tsx         ← 4 stacked bento cards + photo card
+components/sections/FAQSection.tsx           ← accordion (native <details>)
+components/sections/TestimonialsSection.tsx  ← GSAP horizontalLoop slider
 components/sections/ContactSection.tsx       ← left details cards + right form
-app/page.tsx                         ← homepage composition
+app/page.tsx                         ← homepage composition (synchronous, no CMS fetch)
 app/layout.tsx                       ← root with Sidebar + main + FloatingCTAs shell
 ```
+
+**Content source:** Every section reads from `lib/brand.ts` (business identity, contact, hours, social) + an inline `FALLBACK` const for content that's structurally part of the design (FAQ Q&As, testimonial reviews, signature items, about cards). To re-skin per lead, edit `lib/brand.ts` + tweak `figma-tokens.css` accent colors + swap photos in `public/images/`. No CMS round-trip.
 
 ## Spawning a new Fresh-archetype site for a lead
 
@@ -92,7 +90,7 @@ app/layout.tsx                       ← root with Sidebar + main + FloatingCTAs
    - `--color-accent-soft` — semi-transparent border tint
    - `--color-accent-bg` — faint wash for hover states
    - `--color-accent-hover` — darker hover variant
-5. Optional: `npm run seed:sanity` to push placeholder copy into Sanity. Then edit via `/studio`.
+5. Optional: install the Sanity add-on if the client wants self-serve editing. Source lives at `../_addons/sanity-cms/`. Don't install for one-shot $5k mockups.
 
 ## Critical pitfalls
 

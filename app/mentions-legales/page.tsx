@@ -1,20 +1,17 @@
 import type { Metadata } from 'next'
 import Footer from '@/components/layout/Footer'
-import { getSiteSettings } from '@/lib/getHomepage'
-
-export const revalidate = 60
+import { brand } from '@/lib/brand'
 
 export const metadata: Metadata = {
-  title: 'Mentions légales — Le Passage Saint-Honoré',
-  description: "Mentions légales et informations éditeur du site Le Passage Saint-Honoré.",
+  title: `Mentions légales — ${brand.identity.name}`,
+  description: `Mentions légales et informations éditeur du site ${brand.identity.name}.`,
 }
 
-export default async function MentionsLegalesPage() {
-  const settings = await getSiteSettings()
-  const name = settings?.restaurantName ?? 'Le Passage Saint-Honoré'
-  const address = settings?.contact?.address ?? ''
-  const phone = settings?.contact?.phone ?? ''
-  const email = settings?.contact?.email ?? ''
+export default function MentionsLegalesPage() {
+  const name = brand.identity.name
+  const address = brand.contact.address ?? ''
+  const phone = brand.contact.phone ?? ''
+  const email = brand.contact.email ?? ''
 
   return (
     <>
@@ -90,7 +87,7 @@ export default async function MentionsLegalesPage() {
           </section>
         </div>
       </main>
-      <Footer settings={settings} />
+      <Footer />
     </>
   )
 }

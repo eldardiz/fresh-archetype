@@ -7,23 +7,22 @@ import FAQSection from '@/components/sections/FAQSection'
 import TestimonialsSection from '@/components/sections/TestimonialsSection'
 import ContactSection from '@/components/sections/ContactSection'
 import Footer from '@/components/layout/Footer'
-import { getHomepage } from '@/lib/getHomepage'
+import FooterParallax from '@/components/layout/FooterParallax'
 
-export const revalidate = 60
-
-export default async function HomePage() {
-  const data = await getHomepage()
+export default function HomePage() {
   return (
     <>
-      <HeroSection data={data.hero} settings={data.siteSettings} />
-      <FeaturedOfferingSection data={data.featuredOffering} />
+      <HeroSection />
+      <FeaturedOfferingSection />
       <ArtisansSection />
       <SignatureSection />
-      <AboutSection data={data.about} />
+      <AboutSection />
       <FAQSection />
-      <TestimonialsSection data={data.testimonials} />
-      <ContactSection settings={data.siteSettings} />
-      <Footer settings={data.siteSettings} />
+      <TestimonialsSection />
+      <ContactSection />
+      <FooterParallax>
+        <Footer />
+      </FooterParallax>
     </>
   )
 }

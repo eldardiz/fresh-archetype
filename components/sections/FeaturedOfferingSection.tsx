@@ -1,5 +1,4 @@
 import Image from 'next/image'
-import type { FeaturedOfferingData } from '@/lib/sanity.types'
 
 interface FeatCard {
   href: string
@@ -21,7 +20,7 @@ const DEFAULT_CARDS: FeatCard[] = [
   },
   {
     href: '#',
-    img: 'https://images.unsplash.com/photo-1622597467836-f3e6707e1191?auto=format&fit=crop&w=1400&q=80',
+    img: 'https://images.unsplash.com/photo-1600271886742-f049cd451bba?auto=format&fit=crop&w=1400&q=80',
     alt: 'Glasses of fresh juice',
     cornerTag: 'Pressed today',
     name: 'Juice',
@@ -45,10 +44,10 @@ const DEFAULT_CARDS: FeatCard[] = [
   },
 ]
 
-export default function FeaturedOfferingSection({ data }: { data?: FeaturedOfferingData | null }) {
-  const heading = data?.heading || 'Made this morning, gone by noon.'
-  const lede = data?.body || 'Four corners of the counter, picked daily. Pastry from the oven, juice from the press, salads from the cold case, sandwiches built to order.'
-  const cards = DEFAULT_CARDS // Sanity menuCard mapping comes later.
+export default function FeaturedOfferingSection() {
+  const heading = 'Made this morning, gone by noon.'
+  const lede = 'Four corners of the counter, picked daily. Pastry from the oven, juice from the press, salads from the cold case, sandwiches built to order.'
+  const cards = DEFAULT_CARDS
 
   return (
     <section id="featured" className="featured wrap">

@@ -2,12 +2,11 @@
 
 import { useState, type FormEvent } from 'react'
 import { brand } from '@/lib/brand'
-import type { SiteSettingsData } from '@/lib/sanity.types'
 
-export default function ContactSection({ settings }: { settings?: SiteSettingsData | null }) {
-  const phone = settings?.contact?.phone || brand.contact.phone || '(212) 555-0100'
-  const email = settings?.contact?.email || brand.contact.email || 'hello@fresh.co'
-  const address = settings?.contact?.address || brand.contact.address || '412 Hudson St, NY 10014'
+export default function ContactSection() {
+  const phone = brand.contact.phone || '(212) 555-0100'
+  const email = brand.contact.email || 'hello@fresh.co'
+  const address = brand.contact.address || '412 Hudson St, NY 10014'
   const neighborhood = brand.contact.cityShort || 'Hudson & Charles'
 
   const [sent, setSent] = useState(false)
@@ -58,7 +57,7 @@ export default function ContactSection({ settings }: { settings?: SiteSettingsDa
               <div className="lbl">Address</div>
               <div className="val">{address}</div>
             </div>
-            <a className="more" href={settings?.contact?.googleMapsUrl || brand.contact.googleMapsUrl || '#'} target="_blank" rel="noopener noreferrer" aria-label="Get directions">
+            <a className="more" href={brand.contact.googleMapsUrl || '#'} target="_blank" rel="noopener noreferrer" aria-label="Get directions">
               <svg><use href="#i-arr" /></svg>
             </a>
           </article>
