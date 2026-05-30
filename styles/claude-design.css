@@ -1341,3 +1341,249 @@ a:focus-visible, button:focus-visible, summary:focus-visible{
   .cta-book{ height:48px; padding:0 18px 0 14px; font-size:14px; }
   .cta-book .dot{ width:26px; height:26px; }
 }
+
+/* ─────────────────────────────────────────────────────────────────────────
+   MOBILE NAVBAR — adapted from Osmo Supply "Centered Scaling Navigation Bar"
+   Hidden on desktop; shows only at ≤900px (the breakpoint where the rail
+   sidebar disappears). Fresh palette: cream surface, dark olive ink, lime
+   contact banner instead of Osmo's orange.
+   ───────────────────────────────────────────────────────────────────────── */
+.centered-nav-root{
+  display:none;
+}
+@media (max-width: 900px){
+  .centered-nav-root{
+    display:block;
+    z-index:500;
+    pointer-events:none;
+    position:fixed;
+    inset:0;
+  }
+  .centered-nav-backdrop{
+    opacity:0;
+    pointer-events:none;
+    visibility:hidden;
+    background-color:#000;
+    position:absolute;
+    inset:0;
+    transition:opacity .55s cubic-bezier(.5,.5,0,1), visibility .55s linear;
+  }
+  [data-navigation-status="active"] .centered-nav-backdrop{
+    opacity:0.18;
+    visibility:visible;
+    pointer-events:auto;
+  }
+  .centered-nav{
+    border-radius:14px;
+    display:flex;
+    flex-flow:column;
+    justify-content:flex-start;
+    align-items:stretch;
+    position:absolute;
+    top:14px;
+    left:14px;
+    right:14px;
+  }
+  .centered-nav__bg{
+    background-color:var(--surface);
+    border-radius:14px;
+    width:100%;
+    height:100%;
+    position:absolute;
+    inset:0;
+    box-shadow:0 6px 22px rgba(15,15,12,.08), 0 1px 0 rgba(15,15,12,.04);
+  }
+  .centered-nav__header{
+    z-index:1;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:14px 18px 14px 20px;
+    position:relative;
+  }
+  .centered-nav__logo{
+    pointer-events:auto;
+    color:var(--ink);
+    font-family:var(--font-display);
+    font-weight:800;
+    font-size:18px;
+    letter-spacing:-0.02em;
+    line-height:1;
+    text-decoration:none;
+  }
+  .centered-nav__toggle{
+    pointer-events:auto;
+    cursor:pointer;
+    background-color:transparent;
+    border:0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    width:40px;
+    height:40px;
+    padding:0;
+    position:relative;
+    color:var(--ink);
+  }
+  .centered-nav__toggle .centered-nav__toggle-bar{
+    background-color:currentColor;
+    width:24px;
+    height:2px;
+    border-radius:1px;
+    position:absolute;
+    transition:transform .55s cubic-bezier(.65,0,0,1);
+    transform:translateY(-4px) rotate(0.001deg);
+  }
+  .centered-nav__toggle .centered-nav__toggle-bar:nth-child(2){
+    transform:translateY(4px) rotate(0.001deg);
+  }
+  [data-navigation-status="active"] .centered-nav__toggle .centered-nav__toggle-bar{
+    transform:translateY(0) rotate(45deg);
+  }
+  [data-navigation-status="active"] .centered-nav__toggle .centered-nav__toggle-bar:nth-child(2){
+    transform:translateY(0) rotate(-45deg);
+  }
+  .centered-nav__content{
+    border-bottom-right-radius:14px;
+    border-bottom-left-radius:14px;
+    grid-template-rows:0fr;
+    display:grid;
+    position:relative;
+    overflow:hidden;
+    transition:grid-template-rows .55s cubic-bezier(.625,.05,0,1);
+  }
+  [data-navigation-status="active"] .centered-nav__content{
+    grid-template-rows:1fr;
+  }
+  .centered-nav__inner{
+    pointer-events:auto;
+    display:flex;
+    flex-flow:column;
+    justify-content:flex-start;
+    align-items:stretch;
+    width:100%;
+    height:10000%;
+    position:relative;
+    overflow:hidden;
+    gap:0;
+  }
+  .centered-nav__ul{
+    display:flex;
+    flex-flow:column;
+    justify-content:flex-start;
+    align-items:stretch;
+    width:100%;
+    margin:0;
+    padding:0;
+    list-style:none;
+    position:relative;
+  }
+  .centered-nav__li{
+    margin:0;
+    padding:0;
+    list-style:none;
+    overflow:clip;
+    position:relative;
+  }
+  .centered-nav__a{
+    display:block;
+    padding:14px 20px;
+    color:var(--ink);
+    text-decoration:none;
+    position:relative;
+    overflow:hidden;
+  }
+  .centered-nav__a::after{
+    content:'';
+    position:absolute;
+    bottom:0;
+    left:20px;
+    right:20px;
+    height:1px;
+    background:var(--ink);
+    opacity:0.12;
+    transform:scaleX(0);
+    transform-origin:left center;
+    transition:transform .55s cubic-bezier(.65,0,0,1);
+    transition-delay:inherit;
+  }
+  [data-navigation-status="active"] .centered-nav__a::after{
+    transform:scaleX(1);
+  }
+  .centered-nav__p{
+    display:block;
+    font-family:var(--font-display);
+    font-weight:600;
+    font-size:22px;
+    letter-spacing:-0.015em;
+    line-height:1.1;
+    transform:translateY(150%);
+    transition:transform .55s cubic-bezier(.65,0,0,1);
+    transition-delay:inherit;
+  }
+  [data-navigation-status="active"] .centered-nav__p{
+    transform:translateY(0);
+  }
+  .centered-nav__banner-w{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    width:100%;
+    overflow:clip;
+    transition:opacity .55s cubic-bezier(.65,0,0,1);
+    transition-delay:inherit;
+    opacity:0;
+  }
+  [data-navigation-status="active"] .centered-nav__banner-w{
+    opacity:1;
+  }
+  .centered-nav__banner{
+    color:var(--accent-ink);
+    background-color:var(--accent);
+    max-width:100%;
+    width:100%;
+    padding:14px 0;
+    text-decoration:none;
+    transition:background-color .15s;
+    overflow:hidden;
+  }
+  .centered-nav__banner:hover{
+    background-color:var(--accent-line);
+  }
+  .centered-nav__banner-row{
+    display:flex;
+    justify-content:flex-start;
+    align-items:center;
+  }
+  .centered-nav__banner-item{
+    flex:none;
+    display:flex;
+    justify-content:flex-start;
+    align-items:center;
+  }
+  .centered-nav__banner-inner{
+    flex:none;
+    display:flex;
+    justify-content:flex-start;
+    align-items:center;
+    padding-right:28px;
+  }
+  .centered-nav__banner-text{
+    font-family:var(--font-body);
+    font-size:12px;
+    font-weight:600;
+    letter-spacing:0.12em;
+    line-height:1;
+    text-transform:uppercase;
+  }
+  @keyframes centered-nav-marquee{
+    to{ transform:translateX(-100%); }
+  }
+  [data-css-marquee-list]{
+    animation:centered-nav-marquee 18s linear infinite;
+    animation-play-state:paused;
+  }
+  [data-navigation-status="active"] [data-css-marquee-list]{
+    animation-play-state:running;
+  }
+}

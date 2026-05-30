@@ -3,6 +3,7 @@ import { Bricolage_Grotesque, Space_Grotesk } from 'next/font/google'
 import './globals.css'
 import Sidebar from '@/components/layout/Sidebar'
 import FloatingCTAs from '@/components/layout/FloatingCTAs'
+import MobileNav from '@/components/layout/MobileNav'
 import IconSprite from '@/components/ui/IconSprite'
 import { brand } from '@/lib/brand'
 
@@ -55,6 +56,7 @@ export default function RootLayout({
     >
       <body>
         <IconSprite />
+        <MobileNav />
         <div className="shell">
           <Sidebar />
           <main>{children}</main>
